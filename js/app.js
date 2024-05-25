@@ -491,7 +491,7 @@
         const menu__lists = document.querySelectorAll(".menu__list");
         const menuItems = [ {
             text: "Home",
-            href: "/home.html"
+            href: "home.html"
         }, {
             text: "Solutions",
             href: "#",
@@ -518,13 +518,13 @@
             } ]
         }, {
             text: "About us",
-            href: "#"
+            href: "about.html"
         }, {
             text: "FAQ",
-            href: "#"
+            href: "faq.html"
         }, {
             text: "Contact us",
-            href: "#"
+            href: "contacts.html"
         } ];
         const footer_menu = document.querySelectorAll(".footer-menu__column");
         for (let index = 0; index < menu__lists.length; index++) {
@@ -618,6 +618,18 @@
         }
         let footerHomeItem = document.querySelectorAll("footer .footer-menu__link");
         for (let i = 0; i < footerHomeItem.length; i++) if (footerHomeItem[i].innerText === "Home") footerHomeItem[i].remove();
+        const menuLinks = document.querySelectorAll(".menu__link");
+        const burgerBodyMenuLinks = document.querySelectorAll(".burger-body .menu__link");
+        if (document.querySelector(".about")) {
+            menuLinks[1].classList.add("_active");
+            burgerBodyMenuLinks[2].classList.add("_active");
+        } else if (document.querySelector(".faq")) {
+            menuLinks[2].classList.add("_active");
+            burgerBodyMenuLinks[3].classList.add("_active");
+        } else if (document.querySelector(".contact")) {
+            menuLinks[3].classList.add("_active");
+            burgerBodyMenuLinks[4].classList.add("_active");
+        }
         function dynamicAdaptive(da_elements, da_destination, da_breakpoint = 991.98, num, da_type = "max") {
             let parrent_element;
             for (let index = 0; index < da_elements.length; index++) {
@@ -635,12 +647,14 @@
                 }
             }
         }
-        const payMethode__pictureBlock = document.querySelector(".pay-methode__picture-block");
-        const payMethode__content = document.querySelector(".pay-methode__content");
-        dynamicAdaptive([ payMethode__pictureBlock ], payMethode__content, 767.98);
-        const about_us__titles = document.querySelector(".about-us__titles");
-        const about_us__content = document.querySelector(".about-us__content");
-        dynamicAdaptive([ about_us__titles ], about_us__content, 991.98, 2);
+        if (document.querySelector(".home")) {
+            const payMethode__pictureBlock = document.querySelector(".pay-methode__picture-block");
+            const payMethode__content = document.querySelector(".pay-methode__content");
+            const about_us__titles = document.querySelector(".about-us__titles");
+            const about_us__content = document.querySelector(".about-us__content");
+            dynamicAdaptive([ payMethode__pictureBlock ], payMethode__content, 767.98);
+            dynamicAdaptive([ about_us__titles ], about_us__content, 991.98, 2);
+        }
         if (document.querySelector("[data-acc]")) {
             const accordion = document.querySelector("[data-acc]");
             const faq = [ {
@@ -714,6 +728,48 @@
                 }));
             }
         }
+        const accPlusSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">\n<circle cx="24" cy="24" r="23.5" stroke="#BEC6E2"></circle>\n<path d="M17 24H31" stroke="#1D2733" stroke-width="1.5" stroke-linecap="round"></path>\n<path d="M24 31L24 17" stroke="#1D2733" stroke-width="1.5" stroke-linecap="round"></path>\n</svg>`;
+        function initializeAccordion(selector, faqData, openItemIndex = null, closable = false, freemode = true) {
+            const accordion = document.querySelector(selector);
+            if (accordion) {
+                accordion.innerHTML = "";
+                for (let i = 0; i < faqData.length; i++) {
+                    const item = faqData[i];
+                    accordion.innerHTML += `\n               <div class="accordion__item">\n                   <div class="accordion__head">\n                       <div data-aos="zoom-in-up" class="accordion__title">\n                           <span>${i + 1}.</span>${item.question}\n                       </div>\n                       <div data-aos="zoom-in-up" class="accordion__icon">${selector === '[data-acc="accordion-3"]' ? accPlusSvg : ""}</div>\n                   </div>\n                   <div class="accordion__content">\n                       <p data-aos="zoom-in-up" class="accordion__text">${item.text}</p>\n                   </div>\n               </div>`;
+                }
+                const accordionItems = document.querySelectorAll(`${selector} .accordion__item`);
+                if (openItemIndex !== null && accordionItems[openItemIndex]) accordionItems[openItemIndex].classList.add("_active");
+                for (let i = 0; i < accordionItems.length; i++) {
+                    const item = accordionItems[i];
+                    item.addEventListener("click", (function(e) {
+                        if (!closable && freemode) if (item.classList.contains("_active")) item.classList.remove("_active"); else {
+                            if (!closable) for (let index = 0; index < accordionItems.length; index++) {
+                                const element = accordionItems[index];
+                                element.classList.remove("_active");
+                            }
+                            item.classList.toggle("_active");
+                        } else {
+                            if (!closable) for (let index = 0; index < accordionItems.length; index++) {
+                                const element = accordionItems[index];
+                                element.classList.remove("_active");
+                            }
+                            item.classList.toggle("_active");
+                        }
+                    }));
+                }
+            }
+        }
+        const faq1 = [ {
+            question: "What is Akari?",
+            text: "Akari works by securely processing customer transactions through its payment gateway. When a customer makes a payment, the transaction is securely processed, and the funds are transferred to the merchant's account. GumBallPay also offers fraud prevention tools and chargeback management services to help businesses mitigate risk."
+        }, {
+            question: "What payment methods does Akari support?",
+            text: "Akari works by securely processing customer transactions through its payment gateway. When a customer makes a payment, the transaction is securely processed, and the funds are transferred to the merchant's account. GumBallPay also offers fraud prevention tools and chargeback management services to help businesses mitigate risk."
+        }, {
+            question: "Which countries can GumBallPay process payments in?",
+            text: "Akari works by securely processing customer transactions through its payment gateway. When a customer makes a payment, the transaction is securely processed, and the funds are transferred to the merchant's account. GumBallPay also offers fraud prevention tools and chargeback management services to help businesses mitigate risk."
+        } ];
+        initializeAccordion('[data-acc="accordion-3"]', faq1, null, false, true);
         if (document.querySelector("[data-tabs]")) {
             const tabTitles = document.querySelectorAll("[data-tabs-title]");
             const tabContents = document.querySelectorAll("[data-tabs-body]");
@@ -4343,14 +4399,22 @@
                 star.style.left = +Math.round(Math.random() * 100) + "%";
             }
         }
-        const aboutUs = document.querySelector(".about-us");
-        const choose = document.querySelector(".choose");
-        const payMethode = document.querySelector(".pay-methode");
-        let sections = [ aboutUs, choose, payMethode ];
-        for (let i = 0; i < sections.length; i++) {
-            const item = sections[i];
+        if (document.querySelector(".home")) {
+            const aboutUs = document.querySelector(".about-us");
+            const choose = document.querySelector(".choose");
+            const payMethode = document.querySelector(".pay-methode");
+            let sections = [ aboutUs, choose, payMethode ];
+            for (let i = 0; i < sections.length; i++) {
+                const item = sections[i];
+                setInterval((() => {
+                    item.classList.add("act");
+                }), 500);
+            }
+        }
+        if (document.querySelector(".about")) {
+            const coreValues = document.querySelector(".core-values");
             setInterval((() => {
-                item.classList.add("act");
+                coreValues.classList.add("act");
             }), 500);
         }
         isWebp();
