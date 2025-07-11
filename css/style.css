@@ -23,12 +23,12 @@
   --font-wieght: 500;
   --font-size: 1rem;
   --main-color: #fff;
-  --blue: #5282FF;
-  --text-gray: #C6CFDC;
-  --text-dark: #1D2733;
-  --icon-bg: #151B36;
-  --form-items-bg: rgba(255, 255, 255, 0.30);
-  --purple: #6B24A9;
+  --blue: #5282ff;
+  --text-gray: #c6cfdc;
+  --text-dark: #1d2733;
+  --icon-bg: #151b36;
+  --form-items-bg: rgba(255, 255, 255, 0.3);
+  --purple: #6b24a9;
 }
 
 * {

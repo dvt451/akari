@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Верстка «Akari»</title>
+	<title>Project Akari</title>
 </head>
 
 <body>
@@ -19,7 +19,6 @@
 						<li><a target="_blank" href="about.html">About</a></li>
 						<li><a target="_blank" href="faq.html">FAQ</a></li>
 						<li><a target="_blank" href="contacts.html">Contacts</a></li>
-
 					</ol>
 
 					<div class="rootpage__tnx">
@@ -27,9 +26,10 @@
 					</div>
 				</div>
 				<div class="rootpage-footer">
-					<div class="rootpage-footer__copy"><a target="_blank" href="https://dvt-ten.vercel.app/">&copy; dvt451</a> - freelancer</div>
-					<a target="_blank" href="mailto:dvt451@gmail.com" class="rootpage-footer__copy"><span>Email</span> - dvt451@gmail.com</a>
-					<div class="rootpage-footer__copy"><a target="_blank" href="https://t.me/dvt451">Telegram</a></div>
+					<div class="rootpage-footer__copy"><a href="#">&copy; dvt451</a> - freelancer</div>
+					<a target="_blank" href="mailto:dvt451@gmail.com" class="rootpage-footer__copy"><span class="rootpage-footer__title">Email</span> <span class="rootpage-footer__text">-
+							dvt451@gmail.com</span></a>
+					<div class="rootpage-footer__copy"><a target="_blank" class="rootpage-footer__text" href="https://t.me/dvt451">Telegram</a></div>
 				</div>
 			</div>
 		</div>
@@ -176,12 +176,17 @@
 			margin: 0px 0px 10px 0px;
 			text-decoration: none;
 			color: #fff;
+			cursor: context-menu;
 		}
 
 		.rootpage-footer__copy a,
-		.rootpage-footer__copy span {
+		.rootpage-footer__copy .rootpage-footer__title {
 			color: #ece789;
 			text-decoration: none;
+		}
+
+		.rootpage-footer__copy:hover .rootpage-footer__text {
+			text-decoration: underline;
 		}
 
 		.rootpage-footer-social {
@@ -192,13 +197,6 @@
 			display: flex;
 			font-size: 0;
 			padding: 0px 80px 0px 0px;
-		}
-
-		.rootpage-footer-social__link:first-child {
-			background: url(img/YouTube.png) 0 0 no-repeat;
-			background-size: 16px;
-			padding: 0px 0px 0px 25px;
-			color: #ece789;
 		}
 
 		.rootpage-footer-social__link {
